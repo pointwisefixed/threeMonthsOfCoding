@@ -1,0 +1,36 @@
+<lift:surround with="default" at="content">
+    <div class="container">
+        <section class="todo">
+                <ul class="todo-controls lift:DeleteTodos">
+                    <li><a href="#" class="icon-delete">Delete</a></li>
+                    <input type="hidden" id="itemsToDelete" value=""/>
+                </ul>
+            <form id="AddTodoForm" data-lift="form.ajax">
+                <div data-lift="AddTodo" style="margin: 7px 15px 7px 50px">
+                    <input type="text" name="newTodo" placeholder="Add new Item..."/>
+                    <input type="submit" value="Add" style="width:35px;"/>
+                </div>
+                <ul id="todo-list" class="lift:ShowTodo todo-list">
+                </ul>
+            </form>
+        </section>
+    </div>
+
+    <script type="text/javascript">
+
+        function toggleCheckbox(toggleElement){
+            var itemsToDelete = $("#itemsToDelete").val().split(',');
+            var id = toggleElement.getAttribute("for");
+            var indexOfElement = $.inArray(id, itemsToDelete);
+            if(indexOfElement == -1){
+                itemsToDelete.push(id);
+            }
+            else{
+                itemsToDelete.splice(indexOfElement, 1);
+            }
+            $('#itemsToDelete').val(itemsToDelete.join());
+        }
+
+
+    </script>
+</lift:surround>
